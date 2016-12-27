@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="css/style.css" media="all">
+	<script src="js/jquery.js"></script>
+</head>
+<body>
+	<div class="blex">
+		<img src="images/arrows/left.png" class="left">
+		    <div class="blexInsider">
+		    	<!-- Please add your own photos for showing in as slider -->
+		    	<li><a href="a"><img src="images/oneImage.jpg"></a></li>
+				<li><a href="b"><img src="images/twoImage.jpg"></a></li>
+				<li><a href="c"><img src="images/threeImage.jpg"></a></li>
+				<li><a href="d"><img src="images/fourImage.jpg"></a></li>
+				<li><a href="e"><img src="images/fiveImage.jpg"></a></li>
+				<li><a href="f"><img src="images/sexImage.jpg"></a></li>
+				<li><a href="g"><img src="images/sevenImage.jpg"></a></li>
+				<li><a href="h"><img src="images/eightImage.jpg"></a></li>
+				<li><a href="i"><img src="images/nineImage.jpg"></a></li>
+				<li><a href="j"><img src="images/tenImage.jpg"></a></li>
+		    </div>
+		    <div class="showBlexItems"><ul></ul></div>
+		<img src="images/arrows/right.png" class="right">
+	</div>
+
+
+--
+
+	<div class="blexB">
+		<img src="images/arrows/left.png" class="leftB">
+		    <div class="blexInsiderB">
+		    	<!-- Please add your own photos for showing in as slider -->
+		    	<li><a href="a"><img src="images/oneImage.jpg"></a></li>
+				<li><a href="b"><img src="images/twoImage.jpg"></a></li>
+				<li><a href="c"><img src="images/threeImage.jpg"></a></li>
+				<li><a href="d"><img src="images/fourImage.jpg"></a></li>
+				<li><a href="e"><img src="images/fiveImage.jpg"></a></li>
+				<li><a href="f"><img src="images/sexImage.jpg"></a></li>
+				<li><a href="g"><img src="images/sevenImage.jpg"></a></li>
+				<li><a href="h"><img src="images/eightImage.jpg"></a></li>
+				<li><a href="i"><img src="images/nineImage.jpg"></a></li>
+				<li><a href="j"><img src="images/tenImage.jpg"></a></li>
+		    </div>
+		    <div class="showBlexItemsB"><ul></ul></div>
+		<img src="images/arrows/right.png" class="rightB">
+	</div>
+
+
+</body>
+</html>
+
+
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		var i = 0;
+		var listArr = new Array();
+		$(".blexInsider img").each(function(){
+			var className = 'blexInsider'+i;
+            $(this).addClass(className);
+            listArr.push(i);
+            i++;
+        });
+        //Setting
+		var start   = 0;    //Start with index 1
+		var block   = 6;    //Block counts
+		var push    = 1;    //Change blocks with gaurd index
+		var timer   = 6000;
+
+		//-- 
+		var showArr = new Array();
+		var tempArr = new Array();
+		var end = block;
+		//Initial +++++++++
+		// showItems(start,end);
+		for (var x=0; x<block; x++){
+			tempArr.push(x);
+		}
+		showItems(tempArr);
+		setInterval(function(){ goForward(); }, timer);
+		//+++++++++++++++++
+
+		function showItems(arr) {
+			$( ".showBlexItems" ).empty();
+			$(".blexInsider img").css('display','none');
+
+			console.log(arr);
+			for (var y=0; y<arr.length; y++) {
+				$(".blexInsider"+arr[y]).parent().parent().clone().prependTo(".showBlexItems");
+			}
+			$(".showBlexItems img").css('display','block');
+			//$(".showBlexItems img").show(timer);
+
+		}//End Func
+
+			
+		
+
+
+		//Left button has clicked  
+		$(".left").click(function(){
+			goBackward() ;
+        }); 
+
+        function goBackward() {
+          	showArr = tempArr;
+        	tempArr = [];
+        	for (var f=showArr.length-1; f>=0; f--) {
+        		if (showArr[f] - push >= 0) {
+        			//In the sycle
+        			tempArr[f] = showArr[f]-push;
+        		}else{
+        			//Out of cyle
+        			tempArr[f] = listArr.length-showArr[f]-1;//console.log(tempArr[f]);
+        		}
+        	};
+        	
+        	showArr = [];
+        	showArr = tempArr; 
+        	showItems(showArr);
+          }  
+
+		//Right button has clicked
+        $(".right").click(function(){
+        	goForward();
+        });  
+
+        function goForward() {
+        	showArr = tempArr;
+        	tempArr = [];
+        	for (var f=0; f<showArr.length; f++) {
+        		if (showArr[f] + push < listArr.length) {
+        			//In the sycle
+        			tempArr[f] = showArr[f]+push;
+        		}else{
+        			//Out of cyle
+        			tempArr[f] = listArr.length-showArr[f]-1;console.log(tempArr[f]);
+        		}
+        	};
+        	
+        	showArr = [];
+        	showArr = tempArr; 
+        	showItems(showArr);
+        }
+
+
+//End One1
+
+
+
+
+//=========================================
+
+
+
+		var iB = 0;
+		var listArrB = new Array();
+		$(".blexInsiderB img").each(function(){
+			var classNameB = 'blexInsiderB'+iB;
+            $(this).addClass(classNameB);
+            listArrB.push(i);
+            iB++;
+        });
+        //Setting
+		var startB   = 0;    //Start with index 1
+		var blockB   = 4;    //Block counts
+		var pushB    = 1;    //Change blocks with gaurd index
+		var timerB   = 6000;
+
+		//-- 
+		var showArrB = new Array();
+		var tempArrB = new Array();
+		var endB = blockB;
+		//Initial +++++++++
+		// showItems(start,end);
+		for (var xB=0; xB<blockB; xB++){
+			tempArrB.push(xB);
+		}
+		showItemsB(tempArrB);
+		//setInterval(function(){ goForwardB(); }, timerB);
+		//+++++++++++++++++
+
+		function showItemsB(arrB) {
+			$( ".showBlexItemsB" ).empty();
+			$(".blexInsiderB img").css('display','none');
+
+			console.log(arrB);
+			for (var yB=0; yB<arrB.length; yB++) {
+				$(".blexInsiderB"+arrB[yB]).parent().parent().clone().prependTo(".showBlexItemsB"); console.log(".blexInsiderB"+arrB[yB]);
+			}
+			$(".showBlexItemsB img").css('display','block');
+			//$(".showBlexItems img").show(timer);
+
+		}//End Func
+
+			
+		
+
+
+		//Left button has clicked  
+		$(".leftB").click(function(){
+			goBackwardB() ;
+        }); 
+
+        function goBackwardB() {
+          	showArrB = tempArrB;
+        	tempArrB = [];
+        	for (var fB=showArrB.length-1; fB>=0; fB--) {
+        		if (showArrB[fB] - pushB >= 0) {
+        			//In the sycle
+        			tempArrB[fB] = showArrB[fB]-pushB;
+        		}else{
+        			//Out of cyle
+        			tempArrB[fB] = listArrB.length-showArrB[fB]-1;//console.log(tempArr[f]);
+        		}
+        	};
+        	
+        	showArrB = [];
+        	showArrB = tempArrB; 
+        	showItemsB(showArrB);
+          }  
+
+		//Right button has clicked
+        $(".rightB").click(function(){
+        	goForwardB();
+        });  
+
+        function goForwardB() {
+        	showArrB = tempArrB;
+        	tempArrB = [];
+        	for (var fB=0; fB<showArrB.length; fB++) {
+        		if (showArrB[fB] + pushB < listArrB.length) {
+        			//In the sycle
+        			tempArrB[fB] = showArrB[fB]+pushB;
+        		}else{
+        			//Out of cyle
+        			tempArrB[fB] = listArrB.length-showArrB[fB]-1;console.log(tempArr[fB]);
+        		}
+        	};
+        	
+        	showArrB = [];
+        	showArrB = tempArrB; 
+        	showItemsB(showArrB);
+        }
+
+
+        //---
+
+
+	});
+</script>
+
+

@@ -1,0 +1,46 @@
+
+
+
+.blex img{
+	width: 150px;
+
+}
+
+.blexInsider li{
+	display: none;
+
+}
+
+.blex .left{
+	width: 80px;
+}
+
+.blex .right{
+	width: 80px;
+}
+
+
+
+
+
+
+
+
+
+.blexB img{
+	width: 150px;
+
+}
+
+.blexInsiderB li{
+	display: none;
+
+}
+
+.blexB .leftB{
+	width: 80px;
+}
+
+.blexB .rightB{
+	width: 80px;
+}
